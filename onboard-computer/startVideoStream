@@ -1,5 +1,8 @@
 #!/bin/bash
+
+IP_ADDRESS="192.168.0.9"
+
 ffmpeg -f v4l2 -framerate 30 -video_size 640x480 -i /dev/video0 \
 -c:v libx264 -preset veryfast -tune zerolatency -g 15 \
 -x264-params repeat-headers=1:slice-max-size=1200 \
--b:v 800k -f mpegts udp://192.168.0.9:5000
+-b:v 800k -f mpegts udp://$IP_ADDRESS:5000
