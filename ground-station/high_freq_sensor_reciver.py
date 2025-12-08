@@ -1,8 +1,8 @@
 import socket
 import sys
 
-HOST = "0.0.0.0"  # listen on all interfaces
-PORT = 5001        # GPS UDP port
+HOST = "0.0.0.0"
+PORT = 5002
 
 def main():
 	try:
@@ -29,4 +29,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-
