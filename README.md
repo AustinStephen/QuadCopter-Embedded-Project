@@ -35,25 +35,37 @@ This project is a quadcopter HUD primarialy for experimentation with different e
     ```bash
     sudo apt-get update
     sudo apt-get install ffmpeg
+    cd ~/QuadCopterEmbeddedProject/onboard-computer
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements-onboard-computer.txt
     ```
 2. Connect the camera module, GPS and arduino to the Raspberry Pi.
 
 3. Start the video stream:
     ```bash
-    ./startVideoStream
+    chmod +x start_video_stream
+    ./start_video_stream
     ```
 4. Start the GPS data sender:
     ```bash
-    python3 gpsDataSender.py
+    python3 gps_sender.py
     ```
 
 5. Start the arduino data relayer:
     ```bash
-    python3 arduinoDataRelay.py
+    python sensor_sender.py
     ```
 
 ## Ground Station Setup (My laptop running WSL)
-1. Install necessary dependencies:
 
+1. Install necessary dependencies and create virtual environment:
+```bash
+   python3 -m venv ground-station-env
+   source ground-station-env/bin/activate
+   cd ~/QuadCopterEmbeddedProject/ground-station
+   pip install -r requirements-ground-station.txt
+```
 
+2. 
 

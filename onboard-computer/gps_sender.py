@@ -1,3 +1,7 @@
+"""
+Reads NMEA sentences from GPS over serial and sends them via UDP to a desktop.
+Also parses and prints key GPS data to console.
+"""
 import pynmea2
 import serial
 import socket
