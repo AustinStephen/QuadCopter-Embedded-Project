@@ -48,17 +48,6 @@ class GroundStation:
         self.imuSocket.close()
         self.gpsSocket.close() 
         
-    def updateIMU(self):
-        """Update the IMU data from the quadcopter.
-        """
-        data, addr = self.imuSocket.recvfrom(4096)
-        # Assume UTF-8 or ASCII; replace errors to avoid crashes on bad bytes
-        text = data.decode("utf-8", errors="replace")
-        # Many GPS feeds send NMEA lines terminated by \r\n; print as-is
-        print(f"Saving IMU [{addr[0]}:{addr[1]}] {text.strip()}")
-        self.roll, self.pitch, self.yaw = map(float, text.strip().split(','))
-        
-
     ##### Stream functions (Only useful for debugging) ###### 
     # Opens and prints a continuous stream of the data from the onboard computer.
     
@@ -67,8 +56,8 @@ class GroundStation:
         Open continuous IMU data stream 
         """
         print("Starting IMU Stream for", timeout, "seconds...")
-        start_time = time.now()
-        while (time.now() - start_time).seconds < timeout:
+        start_time = time.time()
+        while (time.time() - start_time) < timeout:
             data, addr =  self.imuSocket.recvfrom(4096)
             # Assume UTF-8 or ASCII; replace errors to avoid crashes on bad bytes
             text = data.decode("utf-8", errors="replace")
@@ -80,8 +69,8 @@ class GroundStation:
         """Open a continuous gps stream from the on board computer.
         """
         print("Starting GPS Stream for", timeout, "seconds...")
-        start_time = time.now()
-        while (time.now() - start_time).seconds < timeout:
+        start_time = time.time()
+        while (time.time() - start_time) < timeout:
             data, addr = self.gpsSocket.recvfrom(4096)
             # Assume UTF-8 or ASCII; replace errors to avoid crashes on bad bytes
             text = data.decode("utf-8", errors="replace")
@@ -98,8 +87,8 @@ class GroundStation:
         if not cap.isOpened():
             print("Could not open UDP stream")
             exit(1)
-        start_time = time.now()
-        while (time.now() - start_time).seconds < timeout:
+        start_time = time.time()
+        while (time.time() - start_time) < timeout:
             ret, frame = cap.read()
             if not ret:
                 print("No frame received (stream might not be coming in)")
@@ -113,3 +102,4 @@ class GroundStation:
 
         cap.release()
         cv2.destroyAllWindows()
+        

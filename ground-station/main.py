@@ -5,12 +5,12 @@ def main():
     # Note I'm relying on a lot of the default parameters here.
     gs = GroundStation()
     # Loop the streams to demo functionality
-    for _ in range(10):
-        gs.viewVideoStream(10)
-        gs.viewGPSStream(10)
-        gs.viewIMUStream(10)
+    for _ in range(3):
+        gs.viewVideoStream(5)
+        gs.viewGPSStream(5)
+        gs.viewIMUStream(5)
     # Cleanup
-    gs.__del__()
+    del gs
 
 if __name__ == "__main__":
     main()
