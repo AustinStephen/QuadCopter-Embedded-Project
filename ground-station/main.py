@@ -1,17 +1,17 @@
-from ground_station import GroundStation
+from ground_station_gui import MainWindow
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton, QLabel, QFileDialog
+
+########################
+# Entry Point          #
+########################
 
 def main():
-    """Entry function"""
-    # Note I'm relying on a lot of the default parameters here.
-    gs = GroundStation()
-    # Loop the streams to demo functionality
-    for _ in range(3):
-        gs.viewVideoStream(5)
-        gs.viewGPSStream(5)
-        gs.viewIMUStream(5)
-    # Cleanup
-    del gs
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec_())
 
 if __name__ == "__main__":
     main()
-    
+
